@@ -21,7 +21,7 @@ Responsiveness: The layout adapts to various screen sizes:
 
 ##### OPTIMISATIONS
 
-1. Used React.memo to prevent re-rendering of unchanged component.
+1. Used React.memo to prevent re-rendering of unchanged component like products.
 2. Flexbox is used for a responsive, flexible layout.
 3. Media queries ensure the UI adapts to different screen sizes.
 4. Have used useMemo to cache results of filtered products.
