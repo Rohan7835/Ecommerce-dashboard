@@ -21,10 +21,11 @@ Responsiveness: The layout adapts to various screen sizes:
 
 ##### OPTIMISATIONS
 
-1. Flexbox is used for a responsive, flexible layout.
-2. Media queries ensure the UI adapts to different screen sizes.
-3. Have used useMemo to cache results of filtered products.
-4. Have used single .filter method for all type of filter instead of using .filter method for every kind of filter for eg. Price, category etc.
+1. Used React.memo to prevent re-rendering of unchanged component.
+2. Flexbox is used for a responsive, flexible layout.
+3. Media queries ensure the UI adapts to different screen sizes.
+4. Have used useMemo to cache results of filtered products.
+5. Have used single .filter method for all type of filter instead of using .filter method for every kind of filter for eg. Price, category etc.
 
 ##### ENHANCEMENTS
 
