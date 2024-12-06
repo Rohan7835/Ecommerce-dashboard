@@ -1,42 +1,205 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Header styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+
+/* Logo styles */
+.logo a {
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Navigation styles */
+.nav {
+  display: flex;
+  list-style: none;
+}
+
+.nav ul {
+  display: flex;
+  gap: 20px;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+}
+
+.nav a:hover {
+  background-color: #555;
+  border-radius: 4px;
+}
+
+/* Hamburger icon for mobile */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .nav {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #333;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    display: none; /* Hide menu by default */
+  }
+
+  .nav.open {
+    display: flex; /* Show menu when open */
+  }
+
+  .hamburger {
+    display: flex; /* Show hamburger icon on mobile */
+  }
+
+  .nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav a {
+    padding: 12px;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Footer styles */
+.footer {
+  background-color: #f4f4f4; /* Lighter background color */
+  color: #666; /* Lighter text color */
+  padding: 10px 0; /* Smaller padding */
+  font-family: Arial, sans-serif;
   text-align: center;
+  font-size: 14px; /* Smaller font size */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Footer content container */
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Social links (left side) */
+.social-links {
+  display: flex;
+  gap: 10px; /* Reduced space between icons */
+  justify-content: center;
+}
+
+.social-link {
+  color: #666; /* Lighter text color */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-link:hover {
+  color: #1e90ff; /* Blue hover color */
+}
+
+.social-link svg {
+  transition: transform 0.3s ease;
+  /* Reducing icon size */
+  font-size: 20px; /* Smaller icons */
+}
+
+.social-link:hover svg {
+  transform: scale(1.1); /* Slightly increase icon size on hover */
+}
+
+/* Quick links (middle) */
+.quick-links {
+  display: flex;
+  gap: 10px; /* Reduced space between links */
+  justify-content: center;
+}
+
+.footer-link {
+  color: #666; /* Lighter text color */
+  text-decoration: none;
+  font-weight: 500; /* Lighter font weight */
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #1e90ff; /* Blue hover color */
+}
+
+/* Contact info (right side) */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.contact-info p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px; /* Reduced space between icon and text */
+}
+
+.contact-info a {
+  color: #666; /* Lighter text color */
+  text-decoration: none;
+  font-weight: 500; /* Lighter font weight */
+}
+
+.contact-info a:hover {
+  color: #1e90ff; /* Blue hover color */
+}
+
+/* Footer bottom (centered text) */
+.footer-bottom {
+  margin-top: 10px;
+  font-size: 12px; /* Smaller font size for copyright */
+  border-top: 1px solid #ddd;
+  padding-top: 8px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
   }
-  to {
-    transform: rotate(360deg);
+
+  .social-links,
+  .quick-links,
+  .contact-info {
+    flex: none;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .footer-bottom {
+    margin-top: 15px;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
