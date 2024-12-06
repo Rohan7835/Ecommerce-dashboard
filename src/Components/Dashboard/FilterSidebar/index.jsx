@@ -3,35 +3,40 @@ import React, { useEffect, useState } from "react";
 
 const FilterSidebar = ({ categories, onFilterChange }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [priceRange, setPriceRange] = useState(1000);
   const [rating, setRating] = useState(0);
 
   useEffect(() => {
-    onFilterChange({ category: null, priceRange: null, rating: null });
-  }, []);
+    onFilterChange({ category: selectedCategory, priceRange, rating });
+  }, [selectedCategory, priceRange, rating]);
+
+  const resetFilter = () => {
+    setSelectedCategory("");
+    setPriceRange(1000);
+    setRating(0);
+  };
 
   const handleCategoryChange = (e) => {
     const category = e.target.value;
     setSelectedCategory(category);
-    onFilterChange({ category, priceRange, rating });
   };
 
   const handlePriceChange = (e) => {
-    const value = e.target.value.split(",").map(Number);
+    const value = +e.target.value;
     setPriceRange(value);
-    onFilterChange({ selectedCategory, priceRange: value, rating });
   };
 
   const handleRatingChange = (e) => {
     const selectedRating = parseInt(e.target.value);
     setRating(selectedRating);
-    onFilterChange({ selectedCategory, priceRange, rating: selectedRating });
   };
 
   return (
     <div className="filter-sidebar">
-      <h3>Filters</h3>
-
+      <div className="flex-justify">
+        <h3>Filters</h3>
+        <span onClick={() => resetFilter()}>Reset</span>
+      </div>
       {/* Category Filter */}
       <div className="filter-section">
         <h4>Category</h4>
@@ -57,18 +62,16 @@ const FilterSidebar = ({ categories, onFilterChange }) => {
           min="0"
           max="1000"
           step="1"
-          value={priceRange.join(",")}
+          value={priceRange}
           onChange={handlePriceChange}
           className="filter-range"
         />
-        <p>
-          ${priceRange[0]} - ${priceRange[1]}
-        </p>
+        <p>0 - ${priceRange}</p>
       </div>
 
       {/* Rating Filter */}
       <div className="filter-section">
-        <h4>Rating</h4>
+        <h4>Minimum Rating</h4>
         <div className="rating-options">
           {[1, 2, 3, 4, 5].map((star) => (
             <label key={star}>

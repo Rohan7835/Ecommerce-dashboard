@@ -211,3 +211,15 @@ h3 {
 .container-main {
   display: flex;
 }
+.flex-justify {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0px;
+  cursor: pointer;
+}
+
+.flex-justify h3 {
+  margin: 0;
+  padding: 0;
+}

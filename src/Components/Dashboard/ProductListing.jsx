@@ -37,14 +37,11 @@ const ProductListing = () => {
     // Filter products based on all conditions
     const filtered = allProducts.filter((product) => {
       const isCategoryMatch = category ? product.category === category : true;
-      const isPriceMatch = priceRange
-        ? product.price >= priceRange[0] && product.price <= priceRange[1]
-        : true;
-      const isRatingMatch = rating ? product.rating >= rating : true;
+      const isPriceMatch = priceRange ? product.price <= priceRange : true;
+      const isRatingMatch = rating ? product.rating?.rate >= rating : true;
 
       return isCategoryMatch && isPriceMatch && isRatingMatch;
     });
-    console.log("filtered", filtered);
     setFilteredProducts(filtered);
   };
 
