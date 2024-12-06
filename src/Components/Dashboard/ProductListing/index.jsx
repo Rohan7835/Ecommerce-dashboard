@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { apiCall } from "../../Utils/Api";
-import ProductCard from "./ProductCard/index.jsx";
+import { apiCall } from "../../../Utils/Api";
+import ProductCard from "../ProductCard/index.jsx";
 import { CirclesWithBar } from "react-loader-spinner";
-import FilterSidebar from "./FilterSidebar/index.jsx";
+import FilterSidebar from "../FilterSidebar/index.jsx";
 
 import "./products.css";
 

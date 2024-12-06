@@ -1,5 +1,5 @@
 import React from "react";
-import ProductListing from "./ProductListing.jsx";
+import ProductListing from "./ProductListing/index.jsx";
 
 const Dashboard = () => {
   return <ProductListing />;
