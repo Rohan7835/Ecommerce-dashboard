@@ -1,7 +1,8 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const apiInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -18,7 +19,10 @@ export const apiCall = async (method, endpoint, data = null) => {
 
     return response.data;
   } catch (error) {
-    console.error("API call failed:", error);
-    throw error; // throw the error for further handling
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: error || "Something went wrong!",
+    });
   }
 };
