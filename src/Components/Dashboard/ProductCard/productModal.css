@@ -1,0 +1,100 @@
+/* src/components/ProductModal.css */
+
+.product-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.product-modal-content {
+  background: #fff;
+  width: 80%;
+  max-width: 1000px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  position: relative;
+  flex-direction: row; /* Align image and content side by side */
+}
+
+.product-modal-image-container {
+  flex: 1;
+  max-width: 300px; /* Set a maximum width for the image */
+}
+
+.product-modal-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.product-info {
+  flex: 2; /* Allow content to take more space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 30px;
+  height: 100%;
+}
+
+.product-description {
+  font-size: 1rem;
+  color: #333;
+}
+
+.product-description h4 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 2rem;
+  background: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #e94e77;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .product-modal-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-modal-image-container {
+    max-width: 100%;
+  }
+
+  .product-modal-image {
+    max-width: 300px;
+  }
+
+  .product-info {
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+.product-modal-details {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
