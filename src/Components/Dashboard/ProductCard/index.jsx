@@ -1,23 +1,9 @@
 import React from "react";
+import { renderStars } from "../../../Utils/utils.jsx";
 
 const ProductCard = ({ product }) => {
   const { title, price, category, image, rating } = product;
 
-  const renderStars = (rating) => {
-    const fullStars = Math.floor(rating); // Whole number part of rating
-    const halfStar = rating % 1 >= 0.5 ? 1 : 0; // Half star condition
-    const emptyStars = 5 - fullStars - halfStar; // Remaining empty stars
-
-    const stars = [
-      ...Array(fullStars).fill("full"),
-      ...Array(halfStar).fill("half"),
-      ...Array(emptyStars).fill("empty"),
-    ];
-
-    return stars.map((star, index) => (
-      <span key={index} className={`star ${star}`}></span>
-    ));
-  };
   return (
     <div className="product-card">
       <img src={image} alt={title} className="product-image" />
@@ -26,7 +12,10 @@ const ProductCard = ({ product }) => {
         <p className="product-category">{category}</p>
         <div className="product-price-rating">
           <p className="product-price">${price.toFixed(2)}</p>
-          <div className="product-rating">{renderStars(rating?.rate)}</div>
+          <div className="product-rating">
+            {rating?.rate && renderStars(rating?.rate)}{" "}
+            <span className="product-review">({rating?.count})</span>
+          </div>
         </div>
       </div>
     </div>

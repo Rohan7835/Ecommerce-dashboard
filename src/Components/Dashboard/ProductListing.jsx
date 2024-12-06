@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { apiCall } from "../../Utils/Api";
 import ProductCard from "./ProductCard/index.jsx";
 import { CirclesWithBar } from "react-loader-spinner";
+import FilterSidebar from "./FilterSidebar/index.jsx";
 
 import "./products.css";
 
@@ -9,19 +10,42 @@ const ProductListing = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [visibleProducts, setVisibleProducts] = useState(8);
   const [productsLoading, setProductsLoading] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState(allProducts);
+  const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    getProductsListing();
+    getData();
   }, []);
 
-  const getProductsListing = async () => {
+  const getData = async () => {
     setProductsLoading(true);
-    const data = await apiCall("GET", "/products");
+    const productdata = await apiCall("GET", "/products");
+    const categoryData = await apiCall("GET", "/products/categories");
+
     setProductsLoading(false);
-    if (data) {
-      setAllProducts(data);
+    if (productdata) {
+      setAllProducts(productdata);
     }
+    if (categoryData) {
+      setCategories(categoryData);
+    }
+  };
+
+  const filterProducts = (filters) => {
+    const { category, priceRange, rating } = filters;
+    // Filter products based on all conditions
+    const filtered = allProducts.filter((product) => {
+      const isCategoryMatch = category ? product.category === category : true;
+      const isPriceMatch = priceRange
+        ? product.price >= priceRange[0] && product.price <= priceRange[1]
+        : true;
+      const isRatingMatch = rating ? product.rating >= rating : true;
+
+      return isCategoryMatch && isPriceMatch && isRatingMatch;
+    });
+    console.log("filtered", filtered);
+    setFilteredProducts(filtered);
   };
 
   const loadMoreProducts = () => {
@@ -34,8 +58,8 @@ const ProductListing = () => {
   };
 
   const displayedProducts = useMemo(
-    () => allProducts?.slice(0, visibleProducts),
-    [allProducts, visibleProducts]
+    () => filteredProducts?.slice(0, visibleProducts),
+    [filteredProducts, visibleProducts]
   );
 
   return (
@@ -58,24 +82,33 @@ const ProductListing = () => {
         </div>
       ) : (
         <div>
-          <section className="products-section">
-            <div className="product-container">
-              {displayedProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+          <section className="container-main">
+            <div className="filter-container">
+              <FilterSidebar
+                categories={categories}
+                onFilterChange={filterProducts}
+              />
             </div>
 
-            {visibleProducts < allProducts.length && (
-              <div className="load-more-btn-container">
-                <button
-                  className="load-more-btn"
-                  onClick={loadMoreProducts}
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Loading..." : "Load More"}
-                </button>
+            <div className="products-section">
+              <div className="product-container">
+                {displayedProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
               </div>
-            )}
+
+              {visibleProducts < filteredProducts.length && (
+                <div className="load-more-btn-container">
+                  <button
+                    className="load-more-btn"
+                    onClick={loadMoreProducts}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Loading..." : "Load More"}
+                  </button>
+                </div>
+              )}
+            </div>
           </section>
         </div>
       )}
