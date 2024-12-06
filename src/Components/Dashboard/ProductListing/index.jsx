@@ -13,6 +13,7 @@ const ProductListing = () => {
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const [sortingValue, setSortingValue] = useState("");
   const [categories, setCategories] = useState([]);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
   useEffect(() => {
     getData();
@@ -91,11 +92,21 @@ const ProductListing = () => {
         </div>
       ) : (
         <div>
+          {!isSidebarVisible && (
+            <button
+              className="filter-toggle"
+              onClick={() => setIsSidebarVisible(true)}
+            >
+              <span className="hamburger-icon">☰</span>
+            </button>
+          )}
           <section className="container-main">
             <div className="filter-container">
               <FilterSidebar
                 categories={categories}
                 onFilterChange={filterProducts}
+                isSidebarVisible={isSidebarVisible}
+                setIsSidebarVisible={setIsSidebarVisible}
               />
             </div>
 

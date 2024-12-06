@@ -6,7 +6,7 @@ const apiInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 5000,
+  timeout: 15000,
 });
 
 export const apiCall = async (method, endpoint, data = null) => {
