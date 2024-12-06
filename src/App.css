@@ -203,3 +203,10 @@
     margin-top: 15px;
   }
 }
+
+.Loader {
+  min-height: 76vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

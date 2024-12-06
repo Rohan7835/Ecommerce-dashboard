@@ -1,7 +1,7 @@
 import React from "react";
 
 const ProductCard = ({ product }) => {
-  const { name, price, category, image, rating } = product;
+  const { title, price, category, image, rating } = product;
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating); // Whole number part of rating
@@ -20,9 +20,9 @@ const ProductCard = ({ product }) => {
   };
   return (
     <div className="product-card">
-      <img src={image} alt={name} className="product-image" />
+      <img src={image} alt={title} className="product-image" />
       <div className="product-details">
-        <h3 className="product-name">{name}</h3>
+        <h3 className="product-name">{title}</h3>
         <p className="product-category">{category}</p>
         <div className="product-price-rating">
           <p className="product-price">${price.toFixed(2)}</p>

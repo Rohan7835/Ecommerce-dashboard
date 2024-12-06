@@ -100,7 +100,7 @@
 
 .star {
   font-size: 1.2rem;
-  color: #ffaa00;
+  color: #ff8c00;
 }
 
 .star.empty {
@@ -109,7 +109,7 @@
 
 .star.half::before {
   content: "★";
-  background: linear-gradient(90deg, #ffaa00 50%, #dcdcdc 50%);
+  background: linear-gradient(90deg, #ff8c00 50%, #dcdcdc 50%);
   -webkit-background-clip: text;
   color: transparent;
 }

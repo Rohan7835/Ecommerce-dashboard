@@ -2,11 +2,7 @@ import React from "react";
 import ProductListing from "./ProductListing.jsx";
 
 const Dashboard = () => {
-  return (
-    <div>
-      <ProductListing />
-    </div>
-  );
+  return <ProductListing />;
 };
 
 export default Dashboard;
