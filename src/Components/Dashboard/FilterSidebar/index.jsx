@@ -37,7 +37,7 @@ const FilterSidebar = ({ categories, onFilterChange }) => {
         <h3>Filters</h3>
         <span onClick={() => resetFilter()}>Reset</span>
       </div>
-      {/* Category Filter */}
+
       <div className="filter-section">
         <h4>Category</h4>
         <select
@@ -54,7 +54,6 @@ const FilterSidebar = ({ categories, onFilterChange }) => {
         </select>
       </div>
 
-      {/* Price Range Filter */}
       <div className="filter-section">
         <h4>Price Range</h4>
         <input
@@ -69,7 +68,6 @@ const FilterSidebar = ({ categories, onFilterChange }) => {
         <p>0 - ${priceRange}</p>
       </div>
 
-      {/* Rating Filter */}
       <div className="filter-section">
         <h4>Minimum Rating</h4>
         <div className="rating-options">

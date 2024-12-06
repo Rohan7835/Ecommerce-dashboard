@@ -11,8 +11,8 @@ const ProductListing = () => {
   const [visibleProducts, setVisibleProducts] = useState(8);
   const [productsLoading, setProductsLoading] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
+  const [sortingValue, setSortingValue] = useState("");
   const [categories, setCategories] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getData();
@@ -42,16 +42,28 @@ const ProductListing = () => {
 
       return isCategoryMatch && isPriceMatch && isRatingMatch;
     });
-    setFilteredProducts(filtered);
+    if (sortingValue) {
+      sortProducts(sortingValue, filtered);
+    } else {
+      setFilteredProducts(filtered);
+    }
+  };
+
+  const sortProducts = (order, products = filteredProducts) => {
+    setSortingValue(order);
+    const sorted = [...products];
+
+    if (order === "low-to-high") {
+      sorted.sort((a, b) => a.price - b.price); // Sort from low to high
+    } else if (order === "high-to-low") {
+      sorted.sort((a, b) => b.price - a.price); // Sort from high to low
+    }
+
+    setFilteredProducts(sorted);
   };
 
   const loadMoreProducts = () => {
-    setIsLoading(true);
-    // Simulate a delay like an API call
-    setTimeout(() => {
-      setVisibleProducts((prevVisible) => prevVisible + 8); // Show 6 more products
-      setIsLoading(false);
-    }, 1000);
+    setVisibleProducts((prevVisible) => prevVisible + 8);
   };
 
   const displayedProducts = useMemo(
@@ -88,6 +100,18 @@ const ProductListing = () => {
             </div>
 
             <div className="products-section">
+              <div className="products-header">
+                <div className="sort-container">
+                  <select
+                    className="sort-select"
+                    onChange={(e) => sortProducts(e.target.value)}
+                  >
+                    <option value="">Sort By Price</option>
+                    <option value="low-to-high">Low to High</option>
+                    <option value="high-to-low">High to Low</option>
+                  </select>
+                </div>
+              </div>
               <div className="product-container">
                 {displayedProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
@@ -96,12 +120,8 @@ const ProductListing = () => {
 
               {visibleProducts < filteredProducts.length && (
                 <div className="load-more-btn-container">
-                  <button
-                    className="load-more-btn"
-                    onClick={loadMoreProducts}
-                    disabled={isLoading}
-                  >
-                    {isLoading ? "Loading..." : "Load More"}
+                  <button className="load-more-btn" onClick={loadMoreProducts}>
+                    Load More
                   </button>
                 </div>
               )}
